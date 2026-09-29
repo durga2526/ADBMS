@@ -1,6 +1,6 @@
 
-insert into food_order values(104,'Kiran', 'Sandwich', 150);
+INSERT INTO student VALUES (104, 'Priya');
 
-commit;
+COMMIT;
 
-select*from food_order;
+SELECT * FROM student;
