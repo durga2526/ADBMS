@@ -1,55 +1,55 @@
 SET SERVEROUTPUT ON;
 
-create table customer (
-    id number,
-    name varchar2(20),
-    address varchar2(30),
-    salary number
+CREATE TABLE customer (
+    id NUMBER,
+    name VARCHAR2(20),
+    address VARCHAR2(30),
+    salary NUMBER
 );
 
-insert into customer values (1, 'Durga', 'pondy', 20000);
-insert into customer values (2, 'Hema', 'villupuram', 25000);
-insert into customer values (3, 'Riya', 'chennai', 30000);
+INSERT INTO customer VALUES (1, 'Durga', 'pondy', 20000);
+INSERT INTO customer VALUES (2, 'Hema', 'villupuram', 25000);
+INSERT INTO customer VALUES (3, 'Riya', 'chennai', 30000);
 
-select * from customer;
+SELECT * FROM customer;
 
--- implicit cursor
+DECLARE
+    total_rows NUMBER;
+BEGIN
+    UPDATE customer
+    SET salary = salary + 500;
 
-declare
-    total_rows number;
-begin
-    update customer
-    set salary = salary + 500;
-
-    if sql%notfound then
-        dbms_output.put_line('no customers selected');
-    else
-        total_rows := sql%rowcount;
-        dbms_output.put_line(total_rows || ' customers selected');
-    end if;
-end;
-
-
--- explicit cursor
-
-declare
-    c_id customer.id%type;
-    c_name customer.name%type;
-    c_addr customer.address%type;
-
-    cursor c_customers is
-        select id, name, address from customer;
-begin
-    open c_customers;
-
-    loop
-        fetch c_customers into c_id, c_name, c_addr;
-
-        exit when c_customers%notfound;
-
-        dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr);
-    end loop;
-
-    close c_customers;
-end;
+    IF SQL%NOTFOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No customers updated');
+    ELSE
+        total_rows := SQL%ROWCOUNT;
+        DBMS_OUTPUT.PUT_LINE(total_rows || ' customers updated');
+    END IF;
+END;
 /
+
+DECLARE
+    c_id customer.id%TYPE;
+    c_name customer.name%TYPE;
+    c_addr customer.address%TYPE;
+
+    CURSOR c_customers IS
+        SELECT id, name, address
+        FROM customer;
+
+BEGIN
+    OPEN c_customers;
+
+    LOOP
+        FETCH c_customers INTO c_id, c_name, c_addr;
+
+        EXIT WHEN c_customers%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE(c_id || ' ' || c_name || ' ' || c_addr);
+    END LOOP;
+
+    CLOSE c_customers;
+END;
+/
+
+SELECT * FROM customer;
