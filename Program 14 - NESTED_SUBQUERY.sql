@@ -29,7 +29,7 @@ SELECT emp_id, emp_name, salary FROM staff_subquery WHERE salary > ( SELECT AVG(
 -- Employees who belong to the same
 -- department as Priya
 
-SELECT emp_id, emp_name, dept_id FROM staff_subquery WHERE dept_id = ( SELECT dept_id FROM staff_subqueryWHERE emp_name = 'Priya');
+SELECT emp_id, emp_name, dept_id FROM staff_subquery WHERE dept_id = ( SELECT dept_id FROM staff_subquery WHERE emp_name = 'Priya');
 
 -- Employee with the highest salary
 
