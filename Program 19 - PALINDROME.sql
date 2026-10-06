@@ -1,3 +1,4 @@
+SET SERVEROUTPUT ON;
 DECLARE
     num NUMBER := &enter_a_number;
     temp NUMBER;
