@@ -1,3 +1,4 @@
+SET SERVEROUTPUT ON;
 
 create table customer (
     id number,
@@ -51,3 +52,4 @@ begin
 
     close c_customers;
 end;
+/
