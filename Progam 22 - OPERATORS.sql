@@ -1,3 +1,5 @@
+SET SERVEROUTPUT ON;
+
 DECLARE
     f   NUMBER := &enter_first_number;
     s   NUMBER := &enter_second_number;
